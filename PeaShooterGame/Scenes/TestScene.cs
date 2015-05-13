@@ -20,9 +20,9 @@ namespace PeaShooterGame.Scenes
         {
 
             spiderTexture = content.Load<Texture2D>(@"Images/arachnobase");
-            spiderAnim = new Animation(spiderTexture.Width, spiderTexture.Height, 9, 1, 20);
+            spiderAnim = new Animation(spiderTexture, spiderTexture.Width, spiderTexture.Height, 9, 1, 20);
 
-            spider = new GameObject(spiderTexture, new Vector2(300, 300), spiderAnim);
+            spider = new GameObject(new Vector2(300, 300), spiderAnim);
             //spider.Origin = Vector2.Zero;
             spider.Scale = new Vector2(0.5f, 0.5f);
 

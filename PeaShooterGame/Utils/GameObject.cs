@@ -9,7 +9,6 @@ namespace PeaShooterGame.Utils
 {
     public class GameObject
     {
-        public Texture2D Sprite { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Scale { get; set; }
         public Vector2 Origin { get; set; }
@@ -18,30 +17,29 @@ namespace PeaShooterGame.Utils
         public float Depth { get; set; }
         public Animation Anim { get; set; }
 
-        public GameObject(Texture2D sprite, Vector2 position, Animation anim = null, float depth = 0)
+        public GameObject(Vector2 position, Animation anim, float depth = 0)
         {
-            this.Sprite = sprite;
             this.Position = position;
             this.Scale = new Vector2(1f, 1f);
             this.Rotation = 0;
             this.Effects = SpriteEffects.None;
             this.Depth = depth;
             this.Anim = anim;
-            if (anim == null) this.Origin = new Vector2(this.Sprite.Width / 2f, this.Sprite.Height / 2f);
+            if (anim == null) this.Origin = new Vector2(this.Anim.Sprite.Width / 2f,
+                                                        this.Anim.Sprite.Height / 2f);
             else this.Origin = new Vector2(anim.Result.Width / 2f, anim.Result.Height / 2f);
         }
 
-        public GameObject(Texture2D sprite, Vector2 position, Vector2 scale, Animation anim = null,
-            float depth = 0)
+        public GameObject(Vector2 position, Vector2 scale, Animation anim, float depth = 0)
         {
-            this.Sprite = sprite;
             this.Position = position;
             this.Scale = scale;
             this.Rotation = 0;
             this.Effects = SpriteEffects.None;
             this.Depth = depth;
             this.Anim = anim;
-            if (anim == null) this.Origin = new Vector2(this.Sprite.Width / 2f, this.Sprite.Height / 2f);
+            if (anim == null) this.Origin = new Vector2(this.Anim.Sprite.Width / 2f,
+                                                        this.Anim.Sprite.Height / 2f);
             else this.Origin = new Vector2(anim.Result.Width / 2f, anim.Result.Height / 2f);
         }
 
@@ -49,12 +47,12 @@ namespace PeaShooterGame.Utils
         {
             if (Anim != null)
             {
-                spriteBatch.Draw(this.Sprite, this.Position, Anim.Result, Color.White, this.Rotation,
-                                 this.Origin, this.Scale, this.Effects, this.Depth); 
+                spriteBatch.Draw(this.Anim.Sprite, this.Position, this.Anim.Result, Color.White,
+                                 this.Rotation, this.Origin, this.Scale, this.Effects, this.Depth); 
             }
             else
             {
-                spriteBatch.Draw(this.Sprite, this.Position, null, Color.White, this.Rotation,
+                spriteBatch.Draw(this.Anim.Sprite, this.Position, null, Color.White, this.Rotation,
                                  this.Origin, this.Scale, this.Effects, this.Depth);
             }
         }

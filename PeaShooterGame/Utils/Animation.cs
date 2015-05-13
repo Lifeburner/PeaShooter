@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PeaShooterGame.Utils
 {
@@ -12,6 +13,7 @@ namespace PeaShooterGame.Utils
         public Point Frame { get; private set; }
         public Rectangle Result { get; private set; }
         public bool Active { get; set; }
+        public Texture2D Sprite { get; set; }
         
         private Point _frameDim;
         private int _currentX;
@@ -19,8 +21,9 @@ namespace PeaShooterGame.Utils
         private int _framesToPass;
         private int _totalFrames;
 
-        public Animation(Point dim, Point frame, int fps)
+        public Animation(Texture2D spriteSheet, Point dim, Point frame, int fps)
         {
+            this.Sprite = spriteSheet;
             this.Dimension = dim;
             this.Frame = frame;
             this._frameDim = new Point(this.Dimension.X / this.Frame.X,
@@ -30,8 +33,9 @@ namespace PeaShooterGame.Utils
             this.Active = false;
         }
 
-        public Animation(int dimWidth, int dimHeight, int frameX, int frameY, int fps)
+        public Animation(Texture2D spriteSheet, int dimWidth, int dimHeight, int frameX, int frameY, int fps)
         {
+            this.Sprite = spriteSheet;
             this.Dimension = new Point(dimWidth, dimHeight);
             this.Frame = new Point(frameX, frameY);
             this._frameDim = new Point(this.Dimension.X / this.Frame.X,
