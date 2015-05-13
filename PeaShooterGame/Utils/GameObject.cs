@@ -16,9 +16,13 @@ namespace PeaShooterGame.Utils
         public SpriteEffects Effects { get; set; }
         public float Depth { get; set; }
         public Animation Anim { get; set; }
+        public string Name { get; set; }
+        public string Tag { get; set; }
 
         public GameObject(Vector2 position, Animation anim, float depth = 0)
         {
+            this.Name = "";
+            this.Tag = "";
             this.Position = position;
             this.Scale = new Vector2(1f, 1f);
             this.Rotation = 0;
@@ -32,6 +36,8 @@ namespace PeaShooterGame.Utils
 
         public GameObject(Vector2 position, Vector2 scale, Animation anim, float depth = 0)
         {
+            this.Name = "";
+            this.Tag = "";
             this.Position = position;
             this.Scale = scale;
             this.Rotation = 0;
