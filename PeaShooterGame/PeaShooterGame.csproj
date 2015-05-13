@@ -45,6 +45,7 @@
     <Compile Include="Utils\Animation.cs" />
     <Compile Include="Utils\GameObject.cs" />
     <Compile Include="Utils\IScene.cs" />
+    <Compile Include="Utils\Movement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
