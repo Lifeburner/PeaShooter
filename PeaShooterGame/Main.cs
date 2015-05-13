@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PeaShooterGame.Utils;
+using PeaShooterGame.Scenes;
 
 namespace PeaShooterGame
 {
@@ -13,10 +14,8 @@ namespace PeaShooterGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        // Remove this after testing
-        Texture2D spiderTexture;
-        Animation spiderAnim;
-        GameObject spider;
+        IScene testScene = new TestScene();
+        
 
 
         public Main()
@@ -49,14 +48,7 @@ namespace PeaShooterGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            spiderTexture = Content.Load<Texture2D>(@"Images/arachnobase");
-            spiderAnim = new Animation(spiderTexture.Width, spiderTexture.Height, 9, 1, 20);
-
-            spider = new GameObject(spiderTexture, new Vector2(300, 300), spiderAnim);
-            //spider.Origin = Vector2.Zero;
-            spider.Scale = new Vector2(0.5f, 0.5f);
-
-
+            testScene.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -80,21 +72,7 @@ namespace PeaShooterGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                spider.Anim.Active = true;
-                spider.Position += new Vector2(-1f, 0);
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                spider.Anim.Active = true;
-                spider.Position += new Vector2(1f, 0);
-            }
-            else spider.Anim.Active = false;
-
-                // TODO: Add your update logic here
-                spiderAnim.Update();
-            //spider.Rotation += 0.01f;
+            testScene.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -109,7 +87,7 @@ namespace PeaShooterGame
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            spider.Draw(spriteBatch);
+            testScene.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
