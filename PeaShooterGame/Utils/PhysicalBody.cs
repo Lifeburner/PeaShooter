@@ -32,6 +32,11 @@ namespace PeaShooterGame.Utils
             this.GravityEnabled = gravity;
         }
 
+        public bool CollisionCheck(PhysicalBody collider)
+        {
+            return this.BoundingBox.Intersects(collider.BoundingBox);
+        }
+
         public void Update ()
         {
             if (this.GravityEnabled) this._object.Position += new Vector2(0, _gravitationalPull);
