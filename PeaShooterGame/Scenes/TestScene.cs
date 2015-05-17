@@ -14,7 +14,9 @@ namespace PeaShooterGame.Scenes
     {
         Texture2D spiderTexture;
         Animation spiderAnim;
-        GameObject spider;
+        Actor spider;
+        PhysicalBody spiderPhysics;
+        Movement spiderMove;
 
         public void LoadContent(ContentManager content)
         {
@@ -22,7 +24,16 @@ namespace PeaShooterGame.Scenes
             spiderTexture = content.Load<Texture2D>(@"Images/arachnobase");
             spiderAnim = new Animation(spiderTexture, spiderTexture.Width, spiderTexture.Height, 9, 1, 20);
 
-            spider = new GameObject(new Vector2(300, 300), spiderAnim);
+            spider = new Actor(new Vector2(300, 300), spiderAnim, new Faction("NullFac"));
+            spiderMove = new Movement(spider, new Vector2(1f, 3f));
+            spider.Move = spiderMove;
+
+            spiderPhysics = new PhysicalBody((int)spider.Position.X, (int)spider.Position.Y,
+                                             spider.Anim.Dimension.X / spider.Anim.Frame.X,
+                                             spider.Anim.Dimension.Y / spider.Anim.Frame.Y,
+                                             spider);
+            spider.Collider = spiderPhysics;
+
             //spider.Origin = Vector2.Zero;
             spider.Scale = new Vector2(0.5f, 0.5f);
 
@@ -33,17 +44,19 @@ namespace PeaShooterGame.Scenes
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 spider.Anim.Active = true;
-                spider.Position += new Vector2(-1f, 0);
+                spider.Move.Move(Direction.Left);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 spider.Anim.Active = true;
-                spider.Position += new Vector2(1f, 0);
+                spider.Move.Move(Direction.Right);
             }
             else spider.Anim.Active = false;
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Up)) spider.Move.Move(Direction.Up);
+
             // TODO: Add your update logic here
-            spiderAnim.Update();
+            spider.Update();
             //spider.Rotation += 0.01f;
         }
 

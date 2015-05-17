@@ -13,17 +13,22 @@ namespace PeaShooterGame.Utils
         public Movement Move { get; set; }
 
         public Actor(Vector2 position, Animation anim, Faction faction,
-                     Movement movement, float depth = 0) : base(position, anim, depth)
+                     float depth = 0) : base(position, anim, depth)
         {
             this.UnitFaction = faction;
-            this.Move = movement;
         }
 
         public Actor(Vector2 position, Vector2 scale, Animation anim, Faction faction,
-                     Movement movement, float depth = 0) : base(position, scale, anim, depth)
+                     float depth = 0) : base(position, scale, anim, depth)
         {
             this.UnitFaction = faction;
-            this.Move = movement;
+        }
+
+        public override void Update()
+        {
+
+
+            base.Update();
         }
     }
 }

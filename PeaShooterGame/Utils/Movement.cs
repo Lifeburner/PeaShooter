@@ -9,10 +9,10 @@ namespace PeaShooterGame.Utils
     public class Movement
     {
         private Vector2 _speed;
+        private Vector2 _result;
+        private Actor _actor;
 
         public bool SelfUpdate { get; set; }
-        public Vector2 Position { get; set; }
-        public Vector2 Result { get; private set; }
         public Vector2 Speed
         {
             get { return this._speed; }
@@ -25,9 +25,9 @@ namespace PeaShooterGame.Utils
             }
         }
 
-        public Movement(Vector2 position, Vector2 speed)
+        public Movement(Actor actor, Vector2 speed)
         {
-            this.Position = position;
+            this._actor = actor;
             this.Speed = speed;
             this.SelfUpdate = true;
         }
@@ -37,22 +37,22 @@ namespace PeaShooterGame.Utils
             switch (direction)
             {
                 case Direction.Up:
-                    this.Result = this.Position - new Vector2(0, this.Speed.X);
+                    this._result = this._actor.Position - new Vector2(0, this.Speed.X);
                     break;
                 case Direction.Down:
-                    this.Result = this.Position + new Vector2(0, this.Speed.X);
+                    this._result = this._actor.Position + new Vector2(0, this.Speed.X);
                     break;
                 case Direction.Left:
-                    this.Result = this.Position - new Vector2(this.Speed.Y, 0);
+                    this._result = this._actor.Position - new Vector2(this.Speed.Y, 0);
                     break;
                 case Direction.Right:
-                    this.Result = this.Position + new Vector2(this.Speed.Y, 0);
+                    this._result = this._actor.Position + new Vector2(this.Speed.Y, 0);
                     break;
                 default:
                     throw new FormatException();
             }
 
-            if (this.SelfUpdate) this.Position = this.Result;
+            if (this.SelfUpdate) this._actor.Position = this._result;
         }
     }
 

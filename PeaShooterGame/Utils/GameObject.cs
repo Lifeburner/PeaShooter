@@ -18,6 +18,7 @@ namespace PeaShooterGame.Utils
         public Animation Anim { get; set; }
         public string Name { get; set; }
         public string Tag { get; set; }
+        public PhysicalBody Collider { get; set; }
 
         public GameObject(Vector2 position, Animation anim, float depth = 0)
         {
@@ -47,6 +48,12 @@ namespace PeaShooterGame.Utils
             if (anim == null) this.Origin = new Vector2(this.Anim.Sprite.Width / 2f,
                                                         this.Anim.Sprite.Height / 2f);
             else this.Origin = new Vector2(anim.Result.Width / 2f, anim.Result.Height / 2f);
+        }
+
+        public virtual void Update()
+        {
+            this.Anim.Update();
+            if (this.Collider != null) this.Collider.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
